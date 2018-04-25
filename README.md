@@ -7,6 +7,7 @@ LesTransactions.fr architecture is as follows :
   (1) AMF_crawler.py
 
   Contains 4 classes :
+  
     - AMFdata, which crawls AMF website, parses the pdf files and inserts data into stock_data/amf.db
     
     - Tradingdata, which crawls Euronext website to get last trading price.
@@ -20,6 +21,7 @@ LesTransactions.fr architecture is as follows :
   (2) Stock Data
   
   Located in stock_data/
+  
     - allstocks.py is a dict of all stocks in db
     
     - amf.db is the sqlite3 db file
@@ -33,11 +35,13 @@ LesTransactions.fr architecture is as follows :
   (1) server.fcgi
 
   Based on Flask framework.
+  
   Homepage, Bdd, Login, Logout, etc.
 
   (2) Templates
   
   Located in templates/
+  
   Based on Jinja2
   
   (3) Static
@@ -47,9 +51,10 @@ LesTransactions.fr architecture is as follows :
   (4) User Data
   
   Located in user_data/
-  - users.py is a dict that looks like this : users={email1:{pwd:xxx},email2:{pwd:yyy}}
-  - subscriptions.py is a dict that looks like this : subscriptions={email1:{global:value,FRXX:value,FRYY:value},email2:{global:value,FRXX:value,FRYY:value}}
-    - global is for global alerts, value is the threshold for emails
-    - FRXX is an ISIN, value is the threshold for emails
+  
+    - users.py is a dict that looks like this : users={email1:{pwd:xxx},email2:{pwd:yyy}}
+    - subscriptions.py is a dict that looks like this : subscriptions={email1:{global:value,FRXX:value,FRYY:value},email2:{global:value,FRXX:value,FRYY:value}}
+      - global is for global alerts, value is the threshold for emails
+      - FRXX is an ISIN, value is the threshold for emails
  
  Root folder also contains a local.env file with passwords and API_keys
