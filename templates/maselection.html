@@ -1,0 +1,59 @@
+<title>Espace personnel - LesTransactions.fr</title>
+
+<p align="right">Utilisateur : {{user}}<br>
+<a href="https://lestransactions.fr/logout">Se déconnecter</a><br>
+Retour à <a href="https://lestransactions.fr">l'accueil</a></p>
+
+<h2>1. Votre alerte globale</h2>
+{% if subscription['global'] == '0' %}
+Vous pouvez être alerté dès qu'une transaction de dirigeant diffusée par l'AMF représente plus de x% de la capitalisation boursière.<br>
+Vous n'avez pas mis en place d'alerte globale.<br>
+{% else %}
+Vous recevez un e-mail pour toutes les transactions portant sur des montants supérieurs à <b>{{subscription['global']}}%</b> de la capitalisation boursière de l'action.<br>
+{% endif %}
+<form>Modifier le seuil à <input type="number" id="capi" name="global" style="width:50px" step="0.1" min="0.1" max="100"/> %<input type="hidden" name=user value={{user}}><input type="submit" name="global" value="Modifier" formmethod="post"></form>
+<hr>
+<h2>2. Vos alertes par action</h2>
+<form>
+<input type="hidden" name=user value={{user}}>
+<center><input type="submit" name="isin" value="Mettre à jour" formmethod="post"></center>
+<table border=1 align="center">
+<tr>
+           <th style="text-align:center" title="ISIN">ISIN</th>    
+           <th style="text-align:center" title="Nom">Nom</th>    
+           <th style="text-align:center" title="Seuil actuel pour les alertes e-mail">Seuil actuel</th>    
+           <th style="text-align:center" title="Nouveau seuil d'alerte e-mail">Nouveau seuil</th>    
+           <th style="text-align:center" title="Supprimer">Supprimer</th>
+</tr>
+
+         {% for key,value in subscription.items() %}
+           {% if key != 'global' %}
+            <tr>
+               <td>{{key}}</td>
+               <td>{{stocks[key]}}</td>
+               <td align="center">{{value}}%</td>
+               <td align="center"><input type="number" name={{key}} style="width:100px" step="0.1" min="0" max="100">%</td>
+               <td align="center"><input type="checkbox" name=delete_{{key}} value={{key}}></td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+</table>
+</form>
+
+<h3>Ajouter une action à vos alertes</h3>
+<form>
+<input type="hidden" name=user value={{user}}>
+<center><input type="submit" name="add" value="Ajouter" formmethod="post"></center>
+<table border=1 align="center">
+<tr>
+           <th style="text-align:center" title="ISIN">ISIN (un à la fois)</th>
+           <th style="text-align:center" title="Seuil d'alert">Seuil d'alerte</th>
+</tr>
+<tr>
+           <td align="center"><input type="text" name="new_isin" style="width:150px" placeholder="exmple:FRXXXXXXXX" required></td>
+           <td align="center"><input type="number" name="capi_isin" style="width:100px" step="0.1" min="0" max="100" required>%</td>
+</tr>
+</table>
+</form>
+<br><br><br><br>
+<center><form action="/delete_my_account"><input type="hidden" name=user value={{user}}> <input type="submit" name="delete_all" value="Supprimer mon compte" formmethod="post" onclick="return confirm('Etes-vous sûr ?')"></form></center>

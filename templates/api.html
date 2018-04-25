@@ -1,0 +1,36 @@
+<title>API LesTransactions.fr</title>
+<p align="right">Retour à <a href="https://lestransactions.fr">l'accueil</a><br>
+<a href="https://lestransactions.fr/login">Se connecter</a></p>
+<center><h1> L'API LesTransactions.fr</h1></center>
+
+LesTransactions.fr dispose d'une API à laquelle vous pouvez accéder en faisant une requête <b>POST</b> sur cette page.<br>
+Ce service vous est proposé gratuitement, merci d'en faire un usage raisonnable.
+
+<h1>Paramètres autorisés</h1>
+
+- <b>date</b> avec le format yyyy-mm-dd, <u>exemple</u> : wget https://lestransactions.fr/api --post-data date=2017-06-30<br>
+Permet d'obtenir toutes les transactions pour une date donnée.<br><br>
+
+- <b>isin</b> avec le format FRXXXXXXX, <u>exemple</u> : wget https://lestransactions.fr/api --post-data isin=FRXXXXXXXX<br>
+Permet d'obtenir toutes les transactions pour un ISIN donné.<br>
+
+<h1>Réponse</h1>
+
+La réponse est fournie au format <b>json</b> avec l'architecture suivante :<br>
+(1) une architecture qui numérote chaque résultat de 0 à N <br>
+(2) pour chaque résultat "i", les clés suivantes : <br>
+- "isin" : ISIN<br>
+- "company" : Nom de la société<br>
+- "manager" : Nom du dirigeant<br>
+- "date_transac" : Date de la transaction<br>
+- "nature" : Nature de la transaction (acquisition, cession, etc.)<br>
+- "instrument" : Instrument financier concerné (action, option, etc.)<br>
+- "price" : Prix unitaire<br>
+- "qty" : Volume d'actions concerné<br>
+- "total" : Montant total de la transaction<br>
+- "capital_share" : Pourcentage de la transaction par rapport à la capitalisation boursière<br>
+- "currency" : Monnaie<br>
+- "ref" : Lien vers le pdf de l'AMF<br>
+
+<h3>Exemple de réponse</h3>
+{"0": {"isin": "FR0004152882", "company": "CLASQUIN", "manager": "OLYMP , Administrateur", "date_transac": "2017-06-29", "nature": "Cession", "instrument": "Action", "price": 35.0, "qty": 810, "total": 28350, "capital_share": 0.0354375, "currency": "Euros", "ref": "http://www.amf-france.org/technique/multimedia?docId=ec03ded7-26f1-4813-b852-563f8b9ec161&famille=BDIF&bdifId=140294DD7102_2017DD492041"}, "1": {"isin": "FR0010908533", "company": "EDENRED", "manager": "PHILIPPE DUFOUR, DG INVESTISSEMENTS ALTERNATIFS", "date_transac": "2017-06-29", "nature": "Exercice", "instrument": "Option d'achat", "price": 13.69, "qty": 2167, "total": 29666, "capital_share": 0.0, "currency": "Euros", "ref": "http://www.amf-france.org/technique/multimedia?docId=e5fbbd74-f7cb-41ed-bf08-4051ddd72dab&famille=BDIF&bdifId=652294DD7102_2017DD492256"}, "2": {"isin": "FR0011049824", "company": "MEDIAN TECHNOLOGIES", "manager": "ARNAUD BUTZBACH, Directeur R&amp;D DSI", "date_transac": "2017-06-29", "nature": "Cession", "instrument": "Action", "price": 12.4, "qty": 253, "total": 3137, "capital_share": 0.0, "currency": "Euros", "ref": "http://www.amf-france.org/technique/multimedia?docId=f9c020bf-d34a-4485-9a83-6b54b8459595&famille=BDIF&bdifId=991294DD7102_2017DD492199"}}

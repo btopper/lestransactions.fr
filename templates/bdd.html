@@ -1,0 +1,145 @@
+<html>
+<head>
+<script type="text/javascript" src="../static/jquery.js"></script>
+<style type="text/css">
+#myInput {
+    background-position: 10px 12px; /* Position the search icon */
+    background-repeat: no-repeat; /* Do not repeat the icon image */
+    width: 100%; /* Full-width */
+    font-size: 16px; /* Increase font-size */
+    padding: 12px 20px 12px 40px; /* Add some padding */
+    border: 3px solid #ddd; /* Add a grey border */
+    margin-bottom: 5px; /* Add some space below the input */
+}
+
+#myTable {
+    border-collapse: collapse; /* Collapse borders */
+    width: 100%; /* Full-width */
+    border: 1px solid #ddd; /* Add a grey border */
+    font-size: 10px; /* Increase font-size */
+}
+
+#myTable th{
+    text-align: left; /* Left-align text */
+    background-color: #d3d3d3;
+    font-weight: bold;
+    font-size: 12px;
+    border: 1px solid #000000; /* Add a grey border */
+    padding: 10px; /* Add padding */
+}
+
+#myTable td {
+    text-align: left; /* Left-align text */
+    font-size: 12px;
+    border: 1px solid #000000; /* Add a grey border */
+    padding: 10px; /* Add padding */
+}
+
+#myTable tr {
+    /* Add a bottom border to all table rows */
+    border-bottom: 1px solid #ddd;
+}
+
+#myTable tr.header, #myTable tr:hover {
+    /* Add a grey background color to the table header and on hover */
+    background-color: #d3d3d3;
+}
+</style>
+<title>LesTransactions.fr - Consulter la base de données - Déclaration des dirigeants (AMF)</title>
+Retour à <a href="https://lestransactions.fr">l'accueil</a></p>
+<a href="https://lestransactions.fr/login">Se connecter</a> pour gérer vos alertes e-mail
+</head>
+   <body>
+<style>
+    #overlay {
+        background: #ffffff;
+        color: #666666;
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        z-index: 5000;
+        top: 0;
+        left: 0;
+        float: left;
+        text-align: center;
+        padding-top: 25%;
+    }
+</style>
+<div id="overlay">
+    Chargement de la base de données en cours, merci de patienter...
+</div>
+<h2><b>Consultation en ligne de la base de données ({{data|length}} transactions depuis le 01/01/2017)</b></h2>
+NB: l'utilisation de la barre de recherche peut prendre quelques secondes (selon votre navigateur et votre ordinateur).
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Filtrer par nom de société ...">    
+ <table border = 1 id="myTable">
+            <tr>
+
+            <th style="text-align:center" title="Code ISIN de la société">ISIN</th>
+            <th style="text-align:center" title="Nom de la société">Société</th>
+            <th style="text-align:center" title="Personne physique ou morale réalisant la transaction">Déclarant</th>
+            <th style="text-align:center" title="Date de la transaction (et non pas de la déclaration). La date de la transaction précède la date de déclaration à l'AMF">Date de la transaction</th>
+            <th style="text-align:center" title="Nature de la transaction">Nature</th>
+            <th style="text-align:center" title="Instrument financier">Instrument</th>
+            <th style="text-align:center" title="Prix unitaire auquel la transaction a été réalisée">Prix unitaire</th>
+            <th style="text-align:center" title="Volume échangé pour la transaction">Volume</th>
+            <th style="text-align:center" title="Montant total = Prix unitaire * Volume, aux arrondis près">Montant total</th>
+            <th style="text-align:center" title="% de la capitalisation = Montant total / Capitalisation boursière, indique si la transaction porte ou non sur un montant élevé du capital de la société">Transaction en % de la capi. bours.</th>
+            <th style="text-align:center" title="Cours de clôture hier soir, à comparer au prix unitaire">Dernier cours de bourse</th>
+            <th style="text-align:center" title="Lien direct vers la déclaration AMF">AMF</th>    </tr>     
+            
+         {% for row in data %}
+                     <tr>
+
+               <td>{{row[0]}}</td>
+               <td>{{row[1]}}</td>
+               <td>{{row[2]}}</td>
+               <td style="text-align:center">{{row[3]}}</td>	
+               <td style="text-align:center">{{row[4]}}</td>
+               <td style="text-align:center">{{row[5]}}</td>
+               <td style="text-align:right">{{'{:,.2f}'.format(row[6]|float).replace(".",",")}}</td>
+               <td style="text-align:right" width="100">{{'{:,.1f}'.format(row[7]).replace(".","%").replace(","," ").replace("%",",")}}</td>
+               <td style="text-align:right" width="100">{{'{:,.0f}'.format(row[8]).replace(".","%").replace(","," ").replace("%",",")}}</td>
+               <td style="text-align:center">{{'{:,.2f}'.format(row[9])}}%</td>
+               <td style="text-align:center">{{trade[row[0]]}}</td>
+               <td style="text-align:center"><a href={{row[11]}}>Lien</a></td>	            
+               </tr>
+         {% endfor %}
+      </table>
+<sript>
+<script>
+
+function myFunction() {
+  // Declare variables
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 1; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-91313106-1', 'auto');
+  ga('send', 'pageview');
+
+</script>            
+   </body>
+<script>
+    jQuery(window).load(function(){
+    jQuery('#overlay').stop().fadeOut();
+    });
+</script>
+</html>

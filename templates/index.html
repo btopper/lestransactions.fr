@@ -1,0 +1,104 @@
+<html>
+<head>
+<style type="text/css">
+#myInput {
+    background-position: 10px 12px; /* Position the search icon */
+    background-repeat: no-repeat; /* Do not repeat the icon image */
+    width: 100%; /* Full-width */
+    font-size: 16px; /* Increase font-size */
+    padding: 12px 20px 12px 40px; /* Add some padding */
+    border: 3px solid #ddd; /* Add a grey border */
+    margin-bottom: 5px; /* Add some space below the input */
+}
+
+#myTable {
+    border-collapse: collapse; /* Collapse borders */
+    width: 100%; /* Full-width */
+    border: 1px solid #ddd; /* Add a grey border */
+    font-size: 10px; /* Increase font-size */
+}
+
+#myTable th{
+    text-align: left; /* Left-align text */
+    background-color: #d3d3d3;
+    font-weight: bold;
+    font-size: 12px;
+    border: 1px solid #000000; /* Add a grey border */
+    padding: 10px; /* Add padding */
+}
+
+#myTable td {
+    text-align: left; /* Left-align text */
+    font-size: 12px;
+    border: 1px solid #000000; /* Add a grey border */
+    padding: 10px; /* Add padding */
+}
+
+#myTable tr {
+    /* Add a bottom border to all table rows */
+    border-bottom: 1px solid #ddd;
+}
+
+#myTable tr.header, #myTable tr:hover {
+    /* Add a grey background color to the table header and on hover */
+    background-color: #d3d3d3;
+}</style>
+
+
+</head>
+   <body>
+<title>Déclarations des dirigeants - Opérations d'initiés déclarées à l'AMF</title>
+<center><h2> Déclarations des dirigeants - Opérations d'initiés déclarées à l'AMF.</h2>
+<div id="disclaimer" style="display:none;"><p style="border:3px; border-style:solid; border-color:#FF0000; padding: 1em;">Toutes les données sont générées automatiquement sans contrôle humain préalable, elles sont donc susceptibles de contenir des erreurs.<br>En accédant à ce site internet, vous reconnaissez être seul responsable des préjudices directs, indirects ou consécutifs découlant de l’utilisation des informations et matériels contenus sur ce site Internet, dans les alertes e-mail ou d’autres matériels auxquels vous pourriez avoir accès par le biais des liens hypertextes.<br>Technologies utilisées : <a href="https://www.python.org/" target="_blank">Python</a> - <a href="https://www.sqlite.org/" target="_blank">SQLite3</a> - <a href="http://flask.pocoo.org/" target="_blank">Flask</a> - <a href="http://jinja.pocoo.org/" target="_blank"> Jinja2</a><br>Licence : <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Licence Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a></p></div>
+<p style="text-align:center;font-size:10px"> <a href="javascript:showhide('disclaimer')">Afficher / Cacher les avertissements</a></p></center>
+<b> LesTransactions.fr, c'est quoi ?</b><br>
+- Depuis le 1er janvier 2017, LesTransactions.fr récupère automatiquement les "<a href="http://www.amf-france.org/Recherche-avancee.html?formId=BDIF&DOC_TYPE=BDIF&LANGUAGE=fr&subFormId=dd&BDIF_RAISON_SOCIALE=&bdifJetonSociete=&DATE_PUBLICATION=&DATE_OBSOLESCENCE=&isSearch=true"  target="_blank">Déclarations des dirigeants</a>" publiées au format pdf sur le site de l'AMF.<br>
+- La base est mise à jour <b>quotidiennement</b> vers 19h30. Elle est consultable en ligne et téléchargeable.<br> 
+- Vous pouvez créer un espace personnel pour recevoir des alertes e-mail, envoyées vers 19h30, pour les transactions qui vous intéressent.<br>
+- Une suggestion ? Un bug à signaler ? <a href="mailto:contact@lestransactions.fr" target="_top">contact@lestransactions.fr</a><br>
+<hr>
+<p><b>1. Recevoir des alertes e-mail en créant un espace personnel (100% gratuit)</b><p>
+<center>Déjà inscrit ? <b><a href="https://lestransactions.fr/login">Se connecter</a></b><br>
+<small>Mot de passe perdu ? Il suffit de rentrer votre adresse e-mail ci-dessous et de cliquer sur "Recevoir mon mot de passe par mail".</small><br></center>
+<form action="/signup" method="POST" style="font-size:90%">
+    <div>
+        Dans votre espace personnel, vous pouvez :<br>
+        - <b>ajouter ou retirer</b> les actions pour lesquelles vous souhaitez recevoir des alertes e-mail ;<br>
+        - définir <b>pour chaque action</b> un seuil d'alerte en % de la capitalisation boursière ;<br>
+        - définir un <b>seuil global</b> pour être alerté de toutes les transactions supérieures à x% de la capitalisation boursière.<br>
+        <center><label for="email">Créer votre espace personnel:</label>
+        <input type="email" id="email" name="email" placeholder="Votre e-mail" required/>
+        <button type="submit">Recevoir mon mot de passe par mail</button><br>
+        (Pas de spam ou d'usage commercial, le désabonnement se fait dans votre espace personnel).</center>
+    </div>
+</form>
+<hr>
+<p><b>2. Télécharger les <a href="/data/data.csv">{{data|length}} transactions de la base de données</a> (permalien)</p></b>
+<p style="font-size:90%">Format du fichier : csv - UTF-8 - séparateur : ";"<br>
+Taille : {{ datasize }} Mo <br>
+Sha256 : <span style="font-size:70%">{{ hashsum }}</span><br>
+Vérification antivirus : <a href="/verify" target="_blank">vérifier</a></p>
+<hr>
+<p><b>3. Utiliser notre  <a href="https://lestransactions.fr/api">API</a></b>
+</p>
+<hr>
+<p><b>4. Consulter en ligne la base de données ({{data|length}} transactions depuis le 01/01/2017)</b></p>
+La consultation se fait dorénavant depuis <a href="https://lestransactions.fr/bdd" title="Base de données" target="_blank">une page séparée</a> afin d'accélérer le chargement de la page d'accueil (NB: le chargement de la base peut prendre quelques secondes).            
+   </body>
+</html>
+
+<script>
+     function showhide(id) {
+        var e = document.getElementById(id);
+        e.style.display = (e.style.display == 'block') ? 'none' : 'block';
+     }
+
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-91313106-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
