@@ -58,3 +58,4 @@ LesTransactions.fr architecture is as follows :
       - FRXX is an ISIN, value is the threshold for emails
  
  Root folder also contains a local.env file with passwords and API_keys
+ All files/folders are distributed under CC BY-NC-SA 4.0 licence (see licence file)
