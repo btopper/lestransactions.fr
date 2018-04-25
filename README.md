@@ -1,5 +1,6 @@
 # lestransactions.fr
 
+LesTransactions.fr is based on python3.6.
 LesTransactions.fr architecture is as follows :
 
 ***SERVER SIDE***
@@ -61,3 +62,5 @@ LesTransactions.fr architecture is as follows :
  
  Root folder also contains a local.env file with passwords and API_keys
  All files/folders are distributed under CC BY-NC-SA 4.0 licence (see licence file)
+
+  Contact : contact@lestransactions.fr
