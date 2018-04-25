@@ -8,8 +8,11 @@ LesTransactions.fr architecture is as follows :
 
   Contains 4 classes :
     - AMFdata, which crawls AMF website, parses the pdf files and inserts data into stock_data/amf.db
+    
     - Tradingdata, which crawls Euronext website to get last trading price.
+    
     - Mail, to send e-mail alerts to users.
+    
     - CsvWriter, to write data in a csv file.
 
    AMF_crawler is automatically launched everyday at 7pm using cron.
@@ -18,8 +21,11 @@ LesTransactions.fr architecture is as follows :
   
   Located in stock_data/
     - allstocks.py is a dict of all stocks in db
+    
     - amf.db is the sqlite3 db file
+    
     - amf.csv is the csv counterpart of the sqlite3 db file
+    
     - trade.json is a json file which has last quote for each stock
  
 ***WEB***
