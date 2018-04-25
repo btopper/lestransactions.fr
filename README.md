@@ -57,5 +57,7 @@ LesTransactions.fr architecture is as follows :
       - global is for global alerts, value is the threshold for emails
       - FRXX is an ISIN, value is the threshold for emails
  
+ ***MISC***
+ 
  Root folder also contains a local.env file with passwords and API_keys
  All files/folders are distributed under CC BY-NC-SA 4.0 licence (see licence file)
