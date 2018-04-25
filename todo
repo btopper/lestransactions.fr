@@ -5,3 +5,4 @@ Todo
 (3) Clean-up DB
 (4) Swithc currency column to ISO 4217
 (5) Add yahoo/google/morningstar tickers when possible
+(6) Add crawlers for other countries
