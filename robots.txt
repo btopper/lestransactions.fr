@@ -1,0 +1,3 @@
+User-Agent: *
+Disallow: /verify, /maselection
+Sitemap: https://lestransactions.fr/sitemap.xml
