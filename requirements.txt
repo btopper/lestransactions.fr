@@ -1,0 +1,5 @@
+#based on python3.6
+flask
+flipflop
+requests
+

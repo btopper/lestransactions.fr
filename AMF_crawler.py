@@ -1,19 +1,14 @@
 import subprocess
 import re
 import urllib.request
-import socks
-import socket
 import csv
 import time
 import datetime
-from stem import Signal
-from stem.control import Controller
 from urllib.request import urlopen
 import requests
 import sqlite3
 import smtplib
 import json
-import ssl
 from data.subscriptions import subscriptions
 from local.env import MAIL_PASSWD, BASE_DIR, SMTP_ADDRESS
 
