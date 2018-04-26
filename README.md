@@ -1,6 +1,7 @@
 # lestransactions.fr
 
-LesTransactions.fr is based on python3.6.
+LesTransactions.fr is written in python3.6 and based mostly on Flask, Jinja2 and Sqlite.
+
 LesTransactions.fr architecture is as follows :
 
 ***SERVER SIDE***
