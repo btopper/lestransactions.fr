@@ -61,7 +61,9 @@ LesTransactions.fr architecture is as follows :
  
  ***MISC***
  
- Root folder also contains a local.env file with passwords and API_keys
+ Root folder also contains a local.env file with passwords and API_keys (not committed).
+ If you want to help, check TODO file.
+ 
  All files/folders are distributed under CC BY-NC-SA 4.0 licence (see licence file)
 
   Contact : contact@lestransactions.fr
